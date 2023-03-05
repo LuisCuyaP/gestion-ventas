@@ -11,7 +11,7 @@ const appRoutes: Routes = [
   {path: 'lista-proveedor', component: ListaProveedorComponent},
 ];
 
-
+//test
 @NgModule({
   declarations: [
     AppComponent,
