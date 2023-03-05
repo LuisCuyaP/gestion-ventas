@@ -1,0 +1,45 @@
+<div class="title">
+  <h1> operacion  Mascota</h1>
+</div>
+<form (ngSubmit)="onSubmit()" [formGroup]="addProveedorForm" style="margin: 3%;">
+  <div formGroupName="BasicInfo">
+  <div class="mb-3">
+    <label class="form-label">RUC</label>
+    <input type="text" class="form-control" formControlName="Ruc">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Razon Social</label>
+    <input type="text" class="form-control" formControlName="RazonSocial">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Nombre Comercial</label>
+    <input type="text" class="form-control" formControlName="NombreComercial">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Direccion</label>
+    <input type="text" class="form-control" formControlName="Direccion">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Telefono</label>
+    <input type="text" class="form-control" formControlName="Telefono">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Email</label>
+    <input type="text" class="form-control" formControlName="Email">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Contacto 01</label>
+    <input type="text" class="form-control" formControlName="ContactoUno">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Contacto 02</label>
+    <input type="text" class="form-control" formControlName="ContactoDos">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Observacion</label>
+    <input type="text" class="form-control" formControlName="Observacion">
+  </div>
+</div>
+  <button class="submit" class="btn btn-primary">Aceptar</button>&nbsp;
+  <button class="button" class="btn btn-primary" (click)="onBack()">Volver</button>
+</form>

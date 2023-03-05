@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { IProveedorBase } from 'src/app/model/iproveedorbase';
+import { ControlVentasService } from 'src/app/services/control-ventas.service';
 
 @Component({
   selector: 'app-lista-proveedor',
@@ -6,10 +9,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./lista-proveedor.component.css']
 })
 export class ListaProveedorComponent implements OnInit {
+  proveedores: Array<IProveedorBase> = [];
 
-  constructor() { }
+  constructor(private route: ActivatedRoute,private controlVentasService: ControlVentasService) { }
 
   ngOnInit(): void {
+    this.controlVentasService.getAllProveedores().subscribe(
+      data => {
+        this.proveedores = data;
+        console.log(data);
+      }, error => {
+        console.log(error);
+      }
+    );
   }
 
 }
