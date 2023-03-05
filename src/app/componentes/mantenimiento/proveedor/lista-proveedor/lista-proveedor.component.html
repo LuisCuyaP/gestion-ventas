@@ -1,0 +1,41 @@
+<label>Filtrar nombre: &nbsp; </label>
+<input>
+<button type="button" >Buscar</button>
+<button type="button">Limpiar</button> &nbsp;
+
+<label>Ordenar por &nbsp;</label>
+<select >
+  <option value="City">Nombre</option>
+  <option value="Price">Direccion</option>
+</select>
+<button type="button">
+  <i class="fas fa-sort-alpha-down"></i>
+</button>
+
+<div class="row" style="padding-top: 30px;">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Nombre Comercial</th>
+      <th scope="col">Direccion</th>
+      <th scope="col">Telefono</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+    <tr>
+      <th scope="row">1</th>
+      <td>Rootmman Medical</td>
+      <td>Jr. Las fresias 123</td>
+      <td>985458740</td>
+      <td>
+        <button class="btn btn-primary" routerLink="/"><i class="fas fa-search"></i></button>&nbsp;
+        <button class="btn btn-primary" routerLink="/"><i class="fas fa-plus"></i></button>&nbsp;
+        <button class="btn btn-primary" routerLink="/"><i class="fas fa-edit"></i></button>&nbsp;
+        <button class="btn btn-primary" routerLink="/"><i class="fas fa-trash"></i></button>&nbsp;
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
