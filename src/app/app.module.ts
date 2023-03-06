@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //servicio
 import { AuthService } from './services/auth.service';
 import { ControlVentasService } from './services/control-ventas.service';
+import { AlertifyService } from './services/alertify.service';
 
 //Componentes
 import { AppComponent } from './app.component';
@@ -19,6 +20,7 @@ import { AgregarEditarProveedorComponent } from './componentes/mantenimiento/pro
 import { VerProveedorResolverService } from './componentes/mantenimiento/proveedor/ver-proveedor/ver-proveedor-resolver.service';
 import { UserRegisterComponent } from './user/user-register/user-register.component';
 import { UserLoginComponent } from './user/user-login/user-login.component';
+
 
 
 const appRoutes: Routes = [
@@ -43,7 +45,7 @@ const appRoutes: Routes = [
     VerProveedorComponent,
     AgregarEditarProveedorComponent,
     UserRegisterComponent,
-    UserLoginComponent,
+    UserLoginComponent
   ],
   imports: [
     BrowserModule,
@@ -57,6 +59,7 @@ const appRoutes: Routes = [
   providers: [
     ControlVentasService,
     AuthService,
+    AlertifyService,
   ],
   bootstrap: [AppComponent]
 })

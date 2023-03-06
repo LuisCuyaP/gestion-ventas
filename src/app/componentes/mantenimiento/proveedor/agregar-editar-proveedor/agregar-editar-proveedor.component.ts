@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute,Router } from '@angular/router';
 import { Proveedor } from 'src/app/model/proveedor';
+import { AlertifyService } from 'src/app/services/alertify.service';
 import { ControlVentasService } from 'src/app/services/control-ventas.service';
 
 @Component({
@@ -19,6 +20,7 @@ export class AgregarEditarProveedorComponent implements OnInit {
               private fb: FormBuilder,
               private aRoute: ActivatedRoute,
               private controlVentasService : ControlVentasService,
+              private alertity: AlertifyService,
               ) {
 
     this.CreateAddProveedorForm();
@@ -27,6 +29,11 @@ export class AgregarEditarProveedorComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(!localStorage.getItem('userName')){
+      this.alertity.error('Debe iniciar sesion para agregar un proveedor');
+      this.router.navigate(['/user/login']);
+    }
+
     this.CreateAddProveedorForm();
     if(this.id != 0){
       this.operacion = "Editar";
@@ -129,6 +136,7 @@ export class AgregarEditarProveedorComponent implements OnInit {
   agregarProveedor(){
     this.controlVentasService.addProveedor(this.proveedor).subscribe(
       ()=>{
+        this.alertity.success("El proveedor aparece exitosamente en el sitio web");
         console.log(this.addProveedorForm);
         this.router.navigate(['/lista-proveedor']);
     });
@@ -137,6 +145,7 @@ export class AgregarEditarProveedorComponent implements OnInit {
   editarMascota(id: number){
     this.controlVentasService.updateProveedor(id, this.proveedor).subscribe(
       () =>{
+        this.alertity.success("El proveedor se edito exitosamente en el sitio web");
         this.router.navigate(['/lista-proveedor']);
     });
   }

@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserForLogin } from 'src/app/model/user';
 import { AuthService } from 'src/app/services/auth.service';
+import { AlertifyService } from 'src/app/services/alertify.service';
 
 @Component({
   selector: 'app-user-login',
@@ -12,7 +13,8 @@ import { AuthService } from 'src/app/services/auth.service';
 export class UserLoginComponent implements OnInit {
 
   constructor(private authService: AuthService
-              ,private router: Router) { }
+              ,private router: Router
+              ,private alertyfy: AlertifyService) { }
 
   ngOnInit(): void {
   }
@@ -26,6 +28,7 @@ export class UserLoginComponent implements OnInit {
           if(user){
             localStorage.setItem('token', user.token);
             localStorage.setItem('userName', user.userName);
+            this.alertyfy.success("Inicio de sesion exitoso");
             this.router.navigate(['/']);
           }
         }
