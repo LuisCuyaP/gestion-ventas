@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -31,14 +31,29 @@ export class ControlVentasService {
   }
 
   addProveedor(proveedor: Proveedor){
-    return this.http.post(this.baseUrl + '/proveedor/add', proveedor);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      })
+    };
+    return this.http.post(this.baseUrl + '/proveedor/add', proveedor, httpOptions);
   }
 
   deleteProveedor(proveedorId: number) {
-    return this.http.delete(this.baseUrl + '/proveedor/delete/' +String(proveedorId));
+    const httpOptions = {
+      headers: new HttpHeaders({
+          Authorization: 'Bearer '+ localStorage.getItem('token')
+      })
+    };
+    return this.http.delete(this.baseUrl + '/proveedor/delete/' +String(proveedorId), httpOptions);
   }
 
   updateProveedor(id: number, proveedor : Proveedor) {
-    return this.http.put(this.baseUrl + '/proveedor/update/' + id.toString(), proveedor);
+    const httpOptions = {
+      headers: new HttpHeaders({
+          Authorization: 'Bearer '+ localStorage.getItem('token')
+      })
+    };
+    return this.http.put(this.baseUrl + '/proveedor/update/' + id.toString(), proveedor, httpOptions);
   }
 }
