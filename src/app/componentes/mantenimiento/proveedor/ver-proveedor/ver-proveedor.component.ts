@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Proveedor } from 'src/app/model/proveedor';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ControlVentasService } from 'src/app/services/control-ventas.service';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-ver-proveedor',
@@ -12,9 +12,7 @@ export class VerProveedorComponent implements OnInit {
   public proveedorId: number;
   proveedor = new Proveedor();
 
-  constructor(private route: ActivatedRoute
-              ,private router: Router
-              ,private controlVentasService: ControlVentasService) { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.proveedorId = +this.route.snapshot.params['id'];

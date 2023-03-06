@@ -33,4 +33,12 @@ export class ControlVentasService {
   addProveedor(proveedor: Proveedor){
     return this.http.post(this.baseUrl + '/proveedor/add', proveedor);
   }
+
+  deleteProveedor(proveedorId: number) {
+    return this.http.delete(this.baseUrl + '/proveedor/delete/' +String(proveedorId));
+  }
+
+  updateProveedor(id: number, proveedor : Proveedor) {
+    return this.http.put(this.baseUrl + '/proveedor/update/' + id.toString(), proveedor);
+  }
 }

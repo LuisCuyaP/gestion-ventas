@@ -14,6 +14,10 @@ export class ListaProveedorComponent implements OnInit {
   constructor(private route: ActivatedRoute,private controlVentasService: ControlVentasService) { }
 
   ngOnInit(): void {
+    this.obtenerProveedor();
+  }
+
+  obtenerProveedor(){
     this.controlVentasService.getAllProveedores().subscribe(
       data => {
         this.proveedores = data;
@@ -23,5 +27,17 @@ export class ListaProveedorComponent implements OnInit {
       }
     );
   }
+
+  eliminarProveedor(id: number){
+    this.controlVentasService.deleteProveedor(id).subscribe(
+      data => {
+        this.obtenerProveedor();
+        console.log(data);
+      }, error => {
+        console.log(error);
+      }
+    );
+  }
+
 
 }

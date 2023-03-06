@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 import { Proveedor } from 'src/app/model/proveedor';
 import { ControlVentasService } from 'src/app/services/control-ventas.service';
 
@@ -10,21 +10,49 @@ import { ControlVentasService } from 'src/app/services/control-ventas.service';
   styleUrls: ['./agregar-editar-proveedor.component.css']
 })
 export class AgregarEditarProveedorComponent implements OnInit {
-
+  id: number = 0;
+  operacion: string = "";
   addProveedorForm: FormGroup;
   proveedor = new Proveedor();
 
   constructor(private router: Router,
               private fb: FormBuilder,
-              private controlVentasService : ControlVentasService
-            ) { }
+              private aRoute: ActivatedRoute,
+              private controlVentasService : ControlVentasService,
+              ) {
+
+    this.CreateAddProveedorForm();
+    //this.id = Number(this.aRoute.snapshot.paramMap.get('id'));
+    this.id = +localStorage.getItem('PID')!;
+  }
 
   ngOnInit(): void {
-
-    //validaciones reactivos con el formulario
     this.CreateAddProveedorForm();
+    if(this.id != 0){
+      this.operacion = "Editar";
+      this.obtenerProveedor(this.id);
+    }else{
+      //validaciones reactivos con el formulario
+      this.operacion = "Agregar";
 
+    }
+  }
 
+  obtenerProveedor(id: number){
+     this.controlVentasService.getProveedor(id).subscribe(data => {
+          this.BasicInfo.patchValue({
+                Ruc : data.ruc,
+                RazonSocial : data.razonSocial,
+                NombreComercial : data.nombreComercial,
+                Direccion : data.direccion,
+                Telefono : data.telefono,
+                Email : data.email,
+                ContactoUno : data.contactoUno,
+                ContactoDos : data.contactoDos,
+                Observacion : data.observacion
+          });
+    })
+     //console.log(id);
   }
 
   CreateAddProveedorForm() {
@@ -87,12 +115,30 @@ export class AgregarEditarProveedorComponent implements OnInit {
 
   onSubmit(){
       this.mapProveedor();
-      this.controlVentasService.addProveedor(this.proveedor).subscribe(
-        ()=>{
-          console.log(this.addProveedorForm);
-          this.router.navigate(['/lista-proveedor']);
-      });
+      if(this.id != 0){
+        this.proveedor.id = this.id;
+        this.editarMascota(this.id);
+      }else{
+        this.agregarProveedor();
+      }
 
+
+  }
+
+
+  agregarProveedor(){
+    this.controlVentasService.addProveedor(this.proveedor).subscribe(
+      ()=>{
+        console.log(this.addProveedorForm);
+        this.router.navigate(['/lista-proveedor']);
+    });
+  }
+
+  editarMascota(id: number){
+    this.controlVentasService.updateProveedor(id, this.proveedor).subscribe(
+      () =>{
+        this.router.navigate(['/lista-proveedor']);
+    });
   }
 
   //este metodo mapProveedor me trae todos los datos del formulario para poder ingresarlo a la bd
